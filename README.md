@@ -55,3 +55,86 @@ Ensure your project folder looks like this:
     ├── nomai_words.png       # Nomai script watermarks
     └── timber_hearth.png          # Thankframe background
 ```
+
+
+Quick Start
+
+Clone or Download this repository.
+
+Place the assets mentioned above into a figures/ folder.
+
+In your main.tex, simply load the theme:
+
+Code snippet
+
+```tex
+
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme{OuterWilds}
+
+
+
+\title{Exploration Log 9354}
+
+\author{Hearthian Explorer}
+
+
+
+\begin{document}
+
+    \titlepage
+
+    
+
+    \section{Launch}
+
+    \begin{frame}{Observation}
+
+        ...
+
+    \end{itemize}
+
+    
+    \thankframe
+
+\end{document}
+
+```
+
+Compile twice (Essential for totcount to calculate progress bars correctly).
+
+🎨 Color Palette
+
+The theme uses a strict "2+1" color scheme to ensure academic professionalism:
+
+Nomai Blue (#2260AD): Primary structure, titles, and geometry. Represents logic and science.
+
+Deep Space (#1A202C): Backgrounds for transitions and title slides.
+
+Campfire Orange (#EE6D25): Alerts only. Used sparingly for critical warnings or \alert{...}.
+
+Paper White (#F5F7FA): Background for content slides to reduce eye strain.
+
+🧩 Custom Commands
+
+CommandDescription\section{Name}Automatically creates a dark-mode transition slide with progress bars.\thankframeGenerates the "Signal Lost / The Universe Is, And We Are" closing slide. Do not wrap inside a frame environment.\itemAutomatically uses Nomai Hexagons (Level 1) and Diamonds (Level 2).
+
+⚠️ Known Issues / Troubleshooting
+
+Progress Bar stuck at 0? Run the compilation twice. The totcount package needs one run to count the total sections/pages and a second run to draw the bars.
+
+"Not allowed in LR mode" Error? Check if you wrapped \thankframe inside a \begin{frame}...\end{frame}. Remove the wrapper; the command generates its own frame.
+
+📜 License & Credits
+
+Theme Code: Released under the MIT License.
+
+Art Assets: The logic and design are original. The specific image assets (hourglass.png, eye5.png, etc.) are derivative works based on Outer Wilds.
+
+Disclaimer: Outer Wilds is a trademark of Mobius Digital. This is a fan-made academic tribute and is not affiliated with Mobius Digital or Annapurna Interactive.
+
+"Be curious on your journey!"
+
+
+
