@@ -1,0 +1,142 @@
+% Compile with XeLaTeX
+\documentclass[aspectratio=169]{beamer}
+
+% 加载我们刚刚完成的“挪麦档案”主题
+\usetheme{OuterWilds}
+
+% --- 建议配置：学术字体 (可选) ---
+% 如果您电脑上有这些字体，取消注释会更有味道
+% \usepackage{fontspec}
+% \setmainfont{Roboto} % 或 Arial
+% \setmonofont{Fira Code} % 或 Courier New
+
+% --- 1. 档案元数据 (Metadata) ---
+\title{Chrono-Spatial Analysis of the Outer Wilds System}
+\subtitle{A Case Study on Macroscopic Quantum Phenomena and Time Loop Topology}
+\author{Hearthian Research Division}
+\institute{Outer Wilds Ventures \\ Timber Hearth Observatory}
+\date{Cycle 9,354}
+
+\begin{document}
+
+% --- 2. 封面页 (悬浮取景框风格) ---
+% 使用 plain 选项去除页眉页脚
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+% --- 3. 目录页 ---
+\begin{frame}{Expedition Log}
+    \tableofcontents
+\end{frame}
+
+% =========================================================
+% SECTION 1: 触发酷炫的过渡页 (宇宙之眼背景 + 巨大数字)
+% =========================================================
+\section{Introduction to the System}
+
+% --- 4. 列表展示页 (测试几何符号) ---
+\begin{frame}{Research Objective: The Solar System}
+    We aim to map the celestial bodies and anomalies of the local star system before the impending stellar event.
+
+    \vspace{0.5em}
+    
+    \begin{itemize}
+        \item \textbf{Primary Targets}
+        \begin{itemize}
+            \item \textbf{The Hourglass Twins}: Sand transfer dynamics and high-energy readings.
+            \item \textbf{Brittle Hollow}: Crustal stability and the black hole singularity.
+            \item \textbf{Dark Bramble}: Spatial distortion and biological hazards.
+        \end{itemize}
+        \item \textbf{Key Anomalies Detected}
+        \begin{itemize}
+            \item Rapid stellar evolution (Supernova imminent).
+            \item Temporal discontinuities (Time Loop phenomenon).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% =========================================================
+% SECTION 2: 再次触发过渡页 (进度条动态增长)
+% =========================================================
+\section{Temporal Dynamics}
+
+% --- 5. 区块展示页 (测试极简 Block) ---
+\begin{frame}{The Ash Twin Project (ATP)}
+    The ATP acts as the central processing unit for the memory transmission protocol.
+
+    % 普通区块：极淡蓝色背景 + 左侧粗线
+    \begin{block}{Hypothesis: Memory Transmission}
+        Information is sent back in time by exactly 22 minutes using the energy of a supernova, effectively violating causality to preserve knowledge.
+    \end{block}
+
+    \vspace{1em}
+
+    % 警示区块：橙色线条
+    \begin{alertblock}{Critical Warning: Supernova Event}
+        The sun has reached the end of its main sequence life cycle. Total system annihilation is guaranteed at $T=22:00$.
+    \end{alertblock}
+\end{frame}
+
+% --- 6. 图文排版页 ---
+\begin{frame}{Topological Structure of the Loop}
+    \begin{columns}
+        \column{0.6\textwidth}
+        The time loop can be modeled as a closed timelike curve (CTC). The \textbf{Advanced Warp Core} inside Ash Twin is responsible for opening the singularity.
+        
+        \[
+            \oint_{C} ds^2 < 0 \quad \text{where } \Delta t = -22 \text{ min}
+        \]
+        
+        \begin{itemize}
+            \item \textbf{Trigger}: Sun Station (Failed).
+            \item \textbf{Power Source}: Natural stellar death (Success).
+        \end{itemize}
+
+        \column{0.4\textwidth}
+        % 这里可以用 exampleblock 来模拟计算机终端显示
+        \begin{exampleblock}{Status Report}
+            \ttfamily
+            > WARP CORE: ACTIVE \\
+            > MASKS: PAIRED \\
+            > MEMORY: UPLOADING...
+        \end{exampleblock}
+    \end{columns}
+\end{frame}
+
+% =========================================================
+% SECTION 3: 最后一次过渡
+% =========================================================
+\section{Quantum Mechanics}
+
+% --- 7. 量子规则页 ---
+\begin{frame}{Macroscopic Quantum Rules}
+    Unlike standard physics, quantum phenomena in this system are observable on a planetary scale (e.g., the Quantum Moon).
+
+    \begin{block}{The Rule of Quantum Imaging}
+        "Observing an image of a quantum object is equivalent to observing the object itself."
+    \end{block}
+
+    \begin{itemize}
+        \item \textbf{Entanglement}: Standing on a quantum object allows the observer to become quantum.
+        \item \textbf{The Sixth Location}: The Quantum Moon exists in a superposition of states around all 5 planets and the Eye.
+    \end{itemize}
+\end{frame}
+
+% --- 8. 结论页 ---
+\begin{frame}{Conclusion: The Eye of the Universe}
+    The Eye is older than the universe itself. It acts as a macroscopic observer, potentially collapsing all possibilities into a new reality.
+    
+    \vspace{2em}
+    \centering
+    \large \textbf{Final Consensus} \\
+    \vspace{0.5em}
+    \normalsize
+    The search for the Eye is not about saving this universe, but birthing the next.
+\end{frame}
+
+% --- 9. 致谢页 (信号中断风格) ---
+% 直接调用命令，不要包裹在 frame 中！
+\thankframe
+
+\end{document}

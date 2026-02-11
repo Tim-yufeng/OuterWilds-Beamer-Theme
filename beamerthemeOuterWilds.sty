@@ -1,0 +1,202 @@
+\ProvidesPackage{beamerthemeOuterWilds}
+
+% =============================================================
+% 0. 依赖与配置
+% =============================================================
+\RequirePackage{beamercolorthemeOuterWilds}
+\RequirePackage{tikz}
+\usetikzlibrary{calc, shapes.geometric}
+\RequirePackage{graphicx}
+\RequirePackage{totcount}
+\regtotcounter{section}
+
+% =============================================================
+% Part 1: Inner Theme (列表、区块)
+% =============================================================
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+% --- 几何列表符号 ---
+\newcommand{\nomaiHex}{\tikz[baseline=-0.6ex]{\node[regular polygon, regular polygon sides=6, fill=OW_Nomai, inner sep=1.2pt] {};}}
+\newcommand{\nomaiDiamond}{\tikz[baseline=-0.6ex]{\node[diamond, draw=OW_Nomai, line width=0.8pt, inner sep=1pt] {};}}
+
+\setbeamertemplate{itemize item}{\nomaiHex}
+\setbeamertemplate{itemize subitem}{\nomaiDiamond}
+\setbeamertemplate{itemize subsubitem}{\color{OW_Nomai}\textbf{--}}
+
+% --- Block 样式 ---
+\setbeamertemplate{blocks}[default] 
+\addtobeamertemplate{block begin}{%
+  \vspace{0.5ex}
+  \begin{tikzpicture}[remember picture, overlay]
+      \draw[OW_Nomai, line width=3pt] (-0.5em, 0) -- (-0.5em, 1.1em);
+  \end{tikzpicture}%
+}{}
+\addtobeamertemplate{block alerted begin}{%
+  \vspace{0.5ex}
+  \begin{tikzpicture}[remember picture, overlay]
+      \draw[OW_Alert, line width=3pt] (-0.5em, 0) -- (-0.5em, 1.1em);
+  \end{tikzpicture}%
+}{}
+
+% =============================================================
+% Part 2: Outer Theme (标题栏、背景)
+% =============================================================
+
+% --- 左上角环形进度条 ---
+\tikzset{
+    loop_progress/.pic={
+        \begin{scope}[shift={(current page.north west)}, xshift=0.5cm, yshift=-1cm] 
+            \pgfmathsetmacro{\percent}{\insertframenumber/\inserttotalframenumber}
+            \pgfmathsetmacro{\deg}{90 - (360 * \percent)} % 计算进度条结束角度
+            \draw[OW_Nomai!30, line width=1.5pt] (0,0) circle (0.25cm); % 背景灰圈
+            \draw[OW_Nomai, line width=1.5pt, cap=round] (0,0.25) arc (90:\deg:0.25cm); % 彩色进度弧
+            \node[font=\tiny\bfseries, text=OW_Nomai] at (0,0) {\insertframenumber}; % 页码数字
+        \end{scope}
+    }
+}
+
+% --- 标题栏 ---
+\setbeamertemplate{frametitle}{
+    \nointerlineskip
+    \begin{beamercolorbox}[wd=\paperwidth, ht=1.4cm, sep=10pt]{frametitle}
+        \begin{tikzpicture}[remember picture, overlay]
+            \pic at (-0.2, 0) {loop_progress};
+            \node[anchor=west, font=\Large\bfseries, text=OW_Nomai] at (0.5, 0) {\insertframetitle};
+            \draw[OW_Nomai!40, line width=0.5pt] (0.5, -0.5) -- (2.5, -0.5);
+        \end{tikzpicture}
+    \end{beamercolorbox}
+}
+
+% --- 普通页背景 ---
+\setbeamertemplate{background}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \ifnum\thepage=1
+            % 封面页由 title page 接管，此处仅做深色底
+            \fill[OW_DeepSpace] (current page.south west) rectangle (current page.north east);
+            \node[opacity=0.15, rotate=15] at (current page.center) {
+                \includegraphics[width=0.5\paperwidth]{figures/hourglass.png}
+            };
+        \else
+            % 内容页：极淡的旋转沙漏
+            \pgfmathsetmacro{\bgrotate}{\thepage * 15}
+            \node[opacity=0.04, rotate=\bgrotate] at (current page.center) {
+                \includegraphics[width=0.5\paperwidth]{figures/hourglass.png}
+            };
+        \fi
+    \end{tikzpicture}
+}
+
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% =============================================================
+% Part 3: Title Page (封面页)
+% =============================================================
+\defbeamertemplate*{title page}{OuterWilds}[1][]
+{
+   \begin{tikzpicture}[remember picture, overlay]
+        % 悬浮式取景框
+        \begin{scope}[color=OW_Nomai!60, line width=2.5pt, line cap=round] 
+            % 左上
+            \draw ($(current page.north west)+(0.8cm,-0.8cm)$) -- ++(0, -1.5cm);
+            \draw ($(current page.north west)+(0.8cm,-0.8cm)$) -- ++(1.5cm, 0);
+            % 右上
+            \draw ($(current page.north east)+(-0.8cm,-0.8cm)$) -- ++(0, -1.5cm);
+            \draw ($(current page.north east)+(-0.8cm,-0.8cm)$) -- ++(-1.5cm, 0);
+            % 左下
+            \draw ($(current page.south west)+(0.8cm,0.8cm)$) -- ++(0, 1.5cm);
+            \draw ($(current page.south west)+(0.8cm,0.8cm)$) -- ++(1.5cm, 0);
+            % 右下
+            \draw ($(current page.south east)+(-0.8cm,0.8cm)$) -- ++(0, 1.5cm);
+            \draw ($(current page.south east)+(-0.8cm,0.8cm)$) -- ++(-1.5cm, 0);
+        \end{scope}
+        
+        % 标题内容
+        \node[align=center] at (current page.center) {
+            {\Large \bfseries \color{white} \inserttitle}\\[0.5em]
+            {\color{white!80} \rule{8cm}{1pt}}\\[0.8em]
+            {\large \color{OW_LightText} \insertsubtitle}\\[2em]
+            {\color{OW_Nomai!70} \bfseries \insertauthor}
+        };
+   \end{tikzpicture}
+}
+
+% =============================================================
+% Part 4: Section Transition (过渡页)
+% =============================================================
+\AtBeginSection[]{
+    {
+        \setbeamercolor{background canvas}{bg=OW_DeepSpace}
+        \setbeamercolor{normal text}{fg=OW_LightText}
+        \usebeamercolor[fg]{normal text}
+        \setbeamertemplate{background}{} 
+        \setbeamertemplate{frametitle}{}
+        
+        \begin{frame}[plain, c]
+            \centering
+            \begin{tikzpicture}[remember picture, overlay]
+                % 背景数字
+                \node[text=white, font=\fontsize{100}{100}\selectfont\bfseries, opacity=0.05, anchor=north west] 
+                    at ($(current page.north west)+(0.5cm, -0.5cm)$) {\thesection};
+                % 宇宙之眼
+                \node[opacity=0.05, anchor=east] at (current page.east) {
+                    \includegraphics[height=0.9\paperheight, keepaspectratio]{figures/eye.png}
+                };
+                % 挪麦文字
+                \node[opacity=0.1, anchor=south west] at (current page.south west) {
+                     \includegraphics[width=0.3\paperwidth]{figures/nomai_words.png}
+                };
+                
+                % 内容区
+                \node[align=center] at (current page.center) {
+                    {\Large \bfseries \color{OW_LightText} \insertsection}\\[1em]
+                    \begin{tikzpicture}
+                        % 轨道
+                        \draw[white!20, line width=1.5pt, line cap=round] (-3, 0) -- (3, 0);
+                        % 修复点：使用 \total{section} 而不是 \thetotalsection
+                        \ifnum\totvalue{section}>0
+                            \pgfmathsetmacro{\barlen}{(\thesection / \totvalue{section}) * 6}
+                        \else
+                            \pgfmathsetmacro{\barlen}{0.1} 
+                        \fi
+                        \draw[OW_Nomai!80!cyan, line width=1.5pt, line cap=round] (-3, 0) -- (-3 + \barlen, 0);
+                        \fill[OW_Nomai!80!cyan] (-3 + \barlen, 0) circle (2.5pt);
+                    \end{tikzpicture}\\[1em]
+                    % 修复点：使用 \total{section}
+                    {\tiny \color{white!50} SECTION \thesection \ / \ \total{section}}
+                };
+            \end{tikzpicture}
+        \end{frame}
+    }
+}
+
+% =============================================================
+% Part 5: Thank You Frame (致谢页)
+% =============================================================
+\newcommand{\thankframe}{
+    {
+        \setbeamercolor{background canvas}{bg=OW_DeepSpace}
+        \setbeamercolor{normal text}{fg=OW_LightText}
+        \usebeamercolor[fg]{normal text}
+        \setbeamertemplate{background}{} 
+        \setbeamertemplate{frametitle}{}
+        
+        \begin{frame}[plain, c]
+            \centering
+            \begin{tikzpicture}[remember picture, overlay]           
+                 \node[opacity=0.05, anchor=center] at (current page.center) {
+                    \includegraphics[width=0.65\paperwidth]{figures/timber_hearth.png}
+                 };
+                % 文案
+                \node[align=center] at (current page.center) {
+                    {\Large \bfseries \color{white} THE UNIVERSE IS,}\\[0.5em]
+                    {\Large \bfseries \color{white} AND WE ARE.}\\[2em]
+                    {\large \color{OW_Nomai!80!white} Thank you for your curiosity.}
+                };
+                % 底部装饰线
+                \draw[white!20, line width=1pt] (-2, -1.5) -- (2, -1.5);
+            \end{tikzpicture}
+        \end{frame}
+    }
+}

@@ -1,0 +1,33 @@
+\ProvidesPackage{beamercolorthemeOuterWilds}
+\RequirePackage{xcolor}
+
+% =============================================
+% 1. 调色板定义
+% =============================================
+\definecolor{OW_Bg}{HTML}{F5F7FA}       % 浅灰蓝背景 (普通页)
+\definecolor{OW_Nomai}{HTML}{2260AD}     % 挪麦蓝
+\definecolor{OW_Text}{HTML}{2D3748}      % 深灰文本
+\definecolor{OW_Alert}{HTML}{EE6D25}     % 篝火橙
+\definecolor{OW_DeepSpace}{HTML}{1A202C} % 深岩灰 (过渡页/封面背景)
+\definecolor{OW_LightText}{HTML}{EDF2F7} % 浅色文本
+
+% =============================================
+% 2. 映射 Beamer 元素
+% =============================================
+\setbeamercolor{background canvas}{bg=OW_Bg}
+\setbeamercolor{normal text}{fg=OW_Text}
+\setbeamercolor{frametitle}{fg=OW_Nomai}
+\setbeamercolor{structure}{fg=OW_Nomai}
+
+% Block 样式 (极淡实体背景，防止黑盒bug)
+\setbeamercolor{block title}{bg=OW_Nomai!10!OW_Bg, fg=OW_Nomai}
+\setbeamercolor{block body}{bg=OW_Nomai!5!OW_Bg, fg=OW_Text}
+\setbeamercolor{block title alerted}{bg=OW_Alert!10!OW_Bg, fg=OW_Alert}
+\setbeamercolor{block body alerted}{bg=OW_Alert!5!OW_Bg, fg=OW_Text}
+\setbeamercolor{block title example}{bg=gray!10!OW_Bg, fg=black}
+\setbeamercolor{block body example}{bg=gray!5!OW_Bg, fg=OW_Text}
+
+% 列表符号
+\setbeamercolor{itemize item}{fg=OW_Nomai}
+\setbeamercolor{itemize subitem}{fg=OW_Nomai}
+\setbeamercolor{itemize subsubitem}{fg=OW_Nomai}
